@@ -1,0 +1,46 @@
+.app {
+    background-color: white;
+    margin: 0;
+    height: 100vh;
+    h1 {
+        text-align: center;
+        background-color: lightblue;
+        padding-top: 2rem;
+        margin-top: 0;
+    }
+    div {
+        text-align: center;
+    }
+}
+
+ul {
+    padding-inline-start: 0;
+}
+
+.rating {
+    display: block;
+    background-color: lightblue;
+    padding: 2rem 0;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.switchContainer {
+    text-align: center;
+    padding-top: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.switchText {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: 600;
+    margin: 0 0.5rem;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+}
+

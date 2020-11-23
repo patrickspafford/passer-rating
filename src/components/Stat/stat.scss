@@ -1,0 +1,54 @@
+@import '../../styles/sizes.scss';
+@import '../../styles/borders.scss';
+
+.statLabel {
+    display: block;
+    width: 11rem;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: 600;
+}
+.statInput {
+    width: 9rem;
+    max-width: 10rem;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    border-radius: $borderRadius;
+    text-align: center;
+    font-size: 1.75rem;
+    height: 2.25rem;
+    border: 2px solid black;
+}
+.statButton {
+    width: 3rem;
+    margin: 0 2rem;
+    border-radius: 12px;
+}
+
+.statError {
+    width: 5rem;
+    border-radius: $borderRadius;
+    text-align: center;
+    font-size: 1.75rem;
+    height: 2.25rem;
+    border: 2px solid rgb(156, 4, 4);
+}
+
+.statInput:invalid, .statInput:required {
+    outline: none;
+    box-shadow: none;
+}
+
+.statInput:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.statWrapper {
+    padding: 1rem 1rem;
+}
+
+.statContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
