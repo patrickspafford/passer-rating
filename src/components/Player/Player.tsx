@@ -61,9 +61,11 @@ const Player = ({
                         src={isNFL ? nfl : ncaa }
                     />
                     <label
-                    className='statLabel'
-                    style={{ textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}
-                    >{name}</label>
+                      className='statLabel'
+                      style={{ textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}
+                    >
+                      {name}
+                    </label>
                     <input
                     name={`Passer Rating of ${name}`}
                     value={passerRating}
@@ -75,7 +77,10 @@ const Player = ({
                       style={{ margin: '0 1rem'}}
                       variant='contained'
                       color='secondary'
-                      onClick={() => onDelete(id)}
+                      onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+                          e.stopPropagation()
+                          onDelete(id)
+                        }}
                     >
                         DELETE
                     </Button>

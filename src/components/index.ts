@@ -6,5 +6,7 @@ import Button from './Button'
 import Name from './Name'
 import Player from './Player'
 import Chart from './Chart'
+import Dialog from './Dialog'
+import Footer from './Footer'
 
-export { Stat, Switch, Header, Paper, Button, Name, Player, Chart }
+export { Stat, Switch, Header, Paper, Button, Name, Player, Chart, Dialog, Footer }

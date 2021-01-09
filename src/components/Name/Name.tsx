@@ -3,15 +3,18 @@ import './Name.scss'
 
 interface IName {
     value: string,
+    placeholder: string,
     updateName: any
 }
 
-const Name = ({ value, updateName }: IName) => (
+const Name = ({ value, updateName, placeholder }: IName) => (
     <input
+      id='name'
       className='nameInput'
-      placeholder='Joe Montana'
+      placeholder={placeholder}
       type="text"
       value={value}
+      aria-label='Passer Name'
       onChange={(e) => updateName(e)}
     />
 )

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Switch as MaterialSwitch } from '@material-ui/core'
+import { Switch as MaterialSwitch} from '@material-ui/core'
 import './switch.scss'
 
 interface ISwitch {
@@ -13,7 +13,7 @@ interface ISwitch {
 const Switch = ({ isNFL, toggle, leftLogo, leftLogoAltText, rightLogo, rightLogoAltText }: ISwitch) => (
     <>
         <img style={isNFL ? {} : { opacity: 0.25 }} alt={leftLogoAltText} src={leftLogo} />
-            <MaterialSwitch checked={!isNFL} onChange={toggle} />
+            <MaterialSwitch inputProps={{ 'aria-label': 'NFL/NCAA Switch'}} checked={!isNFL} onChange={toggle} />
         <img style={!isNFL ? {} : { opacity: 0.25 }} alt={rightLogoAltText} src={rightLogo} />
     </>
 )

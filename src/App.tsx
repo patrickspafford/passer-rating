@@ -3,6 +3,7 @@ import { v4 } from 'uuid'
 import useStorage from './hooks/useStorage'
 import PlayerType from './types/Player'
 import { Chart, Stat, Switch, Header, Paper, Button, Name, Player } from './components'
+import { withStyles } from '@material-ui/styles'
 import players from './utils/players'
 import {
   handlePassAttemptsErrors,
@@ -16,6 +17,13 @@ import ncaa from './assets/ncaa.jpg'
 import './App.scss';
 
 const { floor, random } = Math
+const StyledButton = withStyles({
+  root: {
+      color: 'black',
+      fontWeight: 600,
+}})(Button)
+
+const placeholderName = players[floor(random() * players.length)]
 
 const App = () => {
   const [playerList, setPlayerList] = useStorage<string, PlayerType[]>('players', [])
@@ -29,7 +37,7 @@ const App = () => {
   const [isNFL, setIsNFL] = useStorage<string, boolean>('isNFL', true)
   const [playerName, setPlayerName] =
     useStorage<string, string>('playerName',
-      players[floor(random() * players.length)])
+      placeholderName)
   const [passAttempts, setPassAttempts] =
     useStorage<string, number>('passAttempts', 0)
   const [passCompletions, setPassCompletions] =
@@ -111,7 +119,41 @@ const App = () => {
 
   return (
     <div className='app'>
-      <Header />
+      <Header
+        nflData={playerList
+          .filter(player => player.isNFL)
+          .map(player => ({
+            name: player.name,
+            passAttempts: player.passAttempts,
+            passCompletions: player.passCompletions,
+            passYards: player.passYards,
+            touchdowns: player.touchdowns,
+            interceptions: player.interceptions,
+            passerRating: player.passerRating,
+          }))
+        }
+        ncaaData={playerList
+          .filter(player => !player.isNFL)
+          .map(player => ({
+            name: player.name,
+            passAttempts: player.passAttempts,
+            passCompletions: player.passCompletions,
+            passYards: player.passYards,
+            touchdowns: player.touchdowns,
+            interceptions: player.interceptions,
+            passerRating: player.passerRating,
+          }))
+        }
+        headers={[
+          { key: 'name', label: 'Player Name'},
+          { key: 'passAttempts', label: 'Pass Attempts'},
+          { key: 'passCompletions', label: 'Pass Completions'},
+          { key: 'passYards', label: 'Pass Yards'},
+          { key: 'touchdowns', label: 'Touchdowns '},
+          { key: 'interceptions', label: 'Interceptions'},
+          { key: 'passerRating', label: 'Passer Rating'}
+        ]}
+      />
       <div className='grid' style={playerList.length === 0 ? { display: 'block' } : {}}>
         <Paper style={playerList.length === 0 ? {
           width: '50%',
@@ -124,6 +166,7 @@ const App = () => {
         }}>
           <Name
             value={playerName}
+            placeholder={placeholderName}
             updateName={(e: ChangeEvent<HTMLInputElement>) => setPlayerName(e.target.value)}
           />
           <div className='switchContainer'>
@@ -138,6 +181,7 @@ const App = () => {
           </div>
           <Stat
             value={passAttempts}
+            onFocus={() => setPassAttempts(0)}
             onClear={() => setPassAttempts(0)}
             onUpdate={(e: ChangeEvent<HTMLInputElement>) => {
               setPassAttempts(Number(e.target.value))
@@ -152,6 +196,7 @@ const App = () => {
           </Stat>
           <Stat
             value={passCompletions}
+            onFocus={() => setPassCompletions(0)}
             onClear={() => setPassCompletions(0)}
             onUpdate={(e: ChangeEvent<HTMLInputElement>) => {
               setPassCompletions(Number(e.target.value))
@@ -166,6 +211,7 @@ const App = () => {
           </Stat>
           <Stat
             value={passYards}
+            onFocus={() => setPassYards(0)}
             onClear={() => setPassYards(0)}
             onUpdate={(e: ChangeEvent<HTMLInputElement>) => {
               setPassYards(Number(e.target.value))
@@ -180,6 +226,7 @@ const App = () => {
           </Stat>
           <Stat
             value={touchdowns}
+            onFocus={() => setTouchdowns(0)}
             onClear={() => setTouchdowns(0)}
             onUpdate={(e: ChangeEvent<HTMLInputElement>) => {
               setTouchdowns(Number(e.target.value))
@@ -194,6 +241,7 @@ const App = () => {
           </Stat>
           <Stat
             value={interceptions}
+            onFocus={() => setInterceptions(0)}
             onClear={() => setInterceptions(0)}
             onUpdate={(e: ChangeEvent<HTMLInputElement>) => {
               setInterceptions(Number(e.target.value))}}
@@ -222,13 +270,13 @@ const App = () => {
             SAVE
           </Button>
           }
-          <Button
+          <StyledButton
             variant='contained'
             color='secondary'
             onClick={() => clearAll()}
           >
             CLEAR ALL
-          </Button>
+          </StyledButton>
         </Paper>
         <div>
           {
@@ -253,6 +301,7 @@ const App = () => {
               } = player
               return (
               <Player
+                key={id}
                 id={id}
                 name={name}
                 passerRating={passerRating}
@@ -263,6 +312,7 @@ const App = () => {
                 interceptions={interceptions}
                 isNFL={isNFL}
                 onSelect={(playerObject: PlayerType) => {
+                  console.debug('Select')
                   const {
                     id,
                     name,
@@ -285,6 +335,7 @@ const App = () => {
                   }))
                 }}
                 onDelete={(id: string) => {
+                  console.debug(`Delete`)
                   setPlayerList(playerList.filter(listItem => {
                     return listItem.id !== id
                   }))

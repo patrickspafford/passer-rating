@@ -1,0 +1,11 @@
+.csvLink {
+    color: white;
+    text-decoration: none;
+}
+.csvLink:hover {
+    opacity: 0.5
+}
+
+a:-webkit-any-link {
+    color: white;
+}

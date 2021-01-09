@@ -11,6 +11,22 @@ const players = [
     'Drew Brees',
     'Andrew Luck',
     'Brett Favre',
+    'Justin Herbert',
+    'Lamar Jackson',
+    'Deshaun Watson',
+    'Derek Carr',
+    'Ryan Fitzpatrick',
+    'Matt Ryan',
+    'Eli Manning',
+    'Teddy Bridgewater',
+    'Kirk Cousins',
+    'Dak Prescott',
+    'Joe Burrow',
+    'Tony Romo',
+    'Michael Vick',
+    'Russell Wilson',
+    'Patrick Mahomes',
+    'Carson Wentz',
 ]
 
 export default players
